@@ -4,14 +4,14 @@ import * as yaml from 'js-yaml';
 
 export interface Configurations {
   port: number;
+  redis: {
+    enable: boolean;
+    host: string;
+    port: number;
+  };
 }
 
-type Profile =
-  | 'default'
-  | 'alpha'
-  | 'sandbox'
-  | 'beta'
-  | 'production';
+type Profile = 'default' | 'alpha' | 'sandbox' | 'beta' | 'production';
 
 const profile: Profile = (process.env.profile as Profile) || 'default';
 

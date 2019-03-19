@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello, Socket.io</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script>
+      // default namespace로 연결하는 소켓
+      const socket= io({
+        path: '/socket.io',
+        // transports: ['websocket'], 웹소켓 강제 업그레이드
+      });
+
+      // apple namespace로 연결하는 소켓
+      // const socket= io('/apple', {
+      //   path: '/socket.io',
+      // });
+    </script>
+  </head>
+  <body></body>
+</html>
