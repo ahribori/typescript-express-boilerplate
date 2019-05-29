@@ -32,18 +32,20 @@ const createServer = (app: Express.Application, port: number) => {
 
   // Load namespace modules
   const namespaces = fs.readdirSync(path.resolve(__dirname, 'namespaces'));
-  namespaces.forEach(namespace => {
-    const namespaceModule = require(path.resolve(
-      __dirname,
-      'namespaces',
-      namespace,
-    ));
-    const createNamespace =
-      typeof namespaceModule === 'function'
-        ? namespaceModule
-        : namespaceModule.default;
-    createNamespace(io);
-  });
+  namespaces
+    .filter(name => /\.(js|ts)$/i.test(name))
+    .forEach(namespace => {
+      const namespaceModule = require(path.resolve(
+        __dirname,
+        'namespaces',
+        namespace,
+      ));
+      const createNamespace =
+        typeof namespaceModule === 'function'
+          ? namespaceModule
+          : namespaceModule.default;
+      createNamespace(io);
+    });
 
   // Listen
   server.listen(port, () => {
