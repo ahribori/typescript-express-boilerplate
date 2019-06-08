@@ -17,9 +17,9 @@ const createServer = (app: Express.Application, port: number) => {
 
   // SocketIO - Redis configuration
   if (redisConfig.enable) {
-    const { host, port } = redisConfig;
+    const { host, port, channel } = redisConfig;
     if (host && port > 0) {
-      const redisAdapter = redis({ host, port });
+      const redisAdapter = redis({ key: channel || 'socket.io', host, port });
       io.adapter(redisAdapter);
       redisAdapter.pubClient.on('connect', () => {
         console.log('Redis adapter pubClient connected');

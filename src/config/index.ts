@@ -8,6 +8,7 @@ export interface Configurations {
     enable: boolean;
     host: string;
     port: number;
+    channel: string;
   };
 }
 
